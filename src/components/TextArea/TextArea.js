@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import RichTextEditor from "react-rte";
 
 export default class MyStatefulEditor extends Component {
-
 	state = {
 		richValue: RichTextEditor.createEmptyValue(),
 		htmlValue: this.props.text

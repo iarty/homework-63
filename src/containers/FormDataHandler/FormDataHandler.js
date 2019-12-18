@@ -8,7 +8,11 @@ import { Lines } from "react-preloaders";
 
 export default class FormDataHandler extends Component {
 	state = {
-		post: {},
+		post: {
+			date: new Date(),
+			title: "",
+			text: ""
+		},
 		loading: false
 	};
 
@@ -70,7 +74,7 @@ export default class FormDataHandler extends Component {
 				<MDBBtn onClick={this.props.btn ? this.updateData : this.sendData}>
 					{this.props.btn ? this.props.btn : "Add"}
 				</MDBBtn>
-				<Lines customLoading={this.state.loading}/>
+				<Lines customLoading={this.state.loading} />
 			</div>
 		);
 	}
