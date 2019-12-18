@@ -2,26 +2,27 @@ import React, { Component } from "react";
 import RichTextEditor from "react-rte";
 
 export default class MyStatefulEditor extends Component {
-	static getDerivedStateFromProps(props, state) {
-		console.log(props, state);
-		if (props.text !== state.htmlValue) {
-			return {
-				richValue: RichTextEditor.createValueFromString(props.text, "html"),
-				htmlValue: props.text
-			};
-		}
-		return null;
-	}
 
 	state = {
 		richValue: RichTextEditor.createEmptyValue(),
 		htmlValue: this.props.text
 	};
 
+	componentWillReceiveProps(newProps) {
+		if (newProps.text !== this.state.htmlValue) {
+			this.setState({
+				richValue: RichTextEditor.createValueFromString(newProps.text, "html"),
+				htmlValue: newProps.text
+			});
+		}
+	}
+
 	onChange = richValue => {
-		this.setState({ richValue, htmlValue: richValue.toString("html") }, () => {
+		console.log(richValue);
+		this.setState({ richValue, htmlValue: richValue.toString("html") });
+		if (this.props.onChange) {
 			this.props.onChange(this.state.htmlValue);
-		});
+		}
 	};
 
 	render() {
