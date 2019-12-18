@@ -3,6 +3,7 @@ import { MDBCard, MDBCardBody, MDBBtn } from "mdbreact";
 import { NavLink } from "react-router-dom";
 import axios from "../../axios/axios";
 import ReactHtmlParser from "react-html-parser";
+import { Lines } from "react-preloaders";
 
 export default class FullPost extends Component {
 	state = {
@@ -20,8 +21,9 @@ export default class FullPost extends Component {
 		}
 	}
 
-	deletePost = () => {
-		axios.delete(`/posts/${this.props.match.params.id}.json`);
+	deletePost = async () => {
+		await axios.delete(`/posts/${this.props.match.params.id}.json`);
+		this.props.history.push("/");
 	};
 
 	render() {
@@ -57,6 +59,7 @@ export default class FullPost extends Component {
 						</MDBCard>
 					</div>
 				</div>
+				<Lines customLoading={this.state.loading} />
 			</div>
 		);
 	}

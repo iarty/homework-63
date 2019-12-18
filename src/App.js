@@ -14,8 +14,11 @@ export default function App() {
 			<Switch>
 				<Route path='/about' component={About}></Route>
 				<Route path='/contacts' component={Contacts}></Route>
-				<Route path='/posts/add' component={FormDataHandler}></Route>
-				<Route path='/posts/:id/edit' render={props => <FormDataHandler {...props} />}></Route>
+				<Route path='/posts/add' render={props => <FormDataHandler {...props} />}></Route>
+				<Route
+					path='/posts/:id/edit'
+					render={props => <FormDataHandler {...props} headline='Edit post' btn='Edit' />}
+				></Route>
 				<Route path='/posts/:id' component={FullPost}></Route>
 				<Route path={"/" || "/posts"} component={Home}></Route>
 			</Switch>

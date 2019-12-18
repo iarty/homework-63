@@ -22,7 +22,7 @@ export default function Posts(props) {
 						</div>
 						<hr />
 						<h3>{props.title}</h3>
-						<div className='mb-3 p-2'>{ReactHtmlParser(props.text)}</div>
+						<div className='mb-3 p-2'>{ReactHtmlParser(props.text.toString("html"))}</div>
 						<NavLink to={"/posts/" + props.id}>
 							<MDBBtn>Read More >>></MDBBtn>
 						</NavLink>

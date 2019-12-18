@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import Posts from "../../components/Posts/Posts";
 import axios from "../../axios/axios";
+import { Lines } from "react-preloaders";
 
 export default class Home extends Component {
 	state = {
-		posts: []
+		posts: [],
+		loading: true
 	};
 
-	async componentDidMount() {
+	dataHandler = async () => {
 		try {
 			const response = await axios.get("/posts.json");
 			const posts = [];
@@ -17,10 +19,14 @@ export default class Home extends Component {
 					...response.data[key]
 				});
 			});
-			this.setState({ posts });
+			this.setState({ posts, loading: false });
 		} catch (error) {
 			console.log(error);
 		}
+	};
+
+	componentDidMount() {
+		this.dataHandler();
 	}
 
 	render() {
@@ -31,6 +37,7 @@ export default class Home extends Component {
 						<Posts key={index} id={post.id} date={post.date} title={post.title} text={post.text} />
 					))}
 				</ul>
+				<Lines customLoading={this.state.loading}/>
 			</div>
 		);
 	}
