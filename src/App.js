@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Navigation from "./components/Navigation/Navigation";
+import Contacts from "./containers/Contacts/Contacts";
+import Home from "./containers/Home/Home";
+import About from "./containers/About/About";
+import FormDataHandler from "./containers/FormDataHandler/FormDataHandler";
+import FullPost from "./containers/FullPost/FullPost";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	return (
+		<div>
+			<Navigation />
+			<Switch>
+				<Route path='/about' component={About}></Route>
+				<Route path='/contacts' component={Contacts}></Route>
+				<Route path='/posts/add' component={FormDataHandler}></Route>
+				<Route path='/posts/:id/edit' render={props => <FormDataHandler {...props} />}></Route>
+				<Route path='/posts/:id' component={FullPost}></Route>
+				<Route path={"/" || "/posts"} component={Home}></Route>
+			</Switch>
+		</div>
+	);
 }
-
-export default App;
